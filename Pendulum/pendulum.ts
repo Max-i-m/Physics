@@ -111,7 +111,7 @@ class View{
         this.pathCanvas = <HTMLCanvasElement>document.getElementById("pathCanvas");
         this.pathCtx = <CanvasRenderingContext2D>this.pathCanvas.getContext("2d");
         this.img = new Image();
-        this.img.src = "Images/steelball.png";
+        this.img.src = "../images/SteelBall.png";
 
         let resetButton = <HTMLInputElement>document.getElementById("reset")!;
 
@@ -125,21 +125,21 @@ class View{
         this.updateBodyRadius();
 
         document.getElementById("length")!.addEventListener("change", () => {
-            this.physics.length = Number.parseFloat((<HTMLInputElement>document.getElementById("length")).value);
+            this.physics.length = parseFloat((<HTMLInputElement>document.getElementById("length")).value);
             this.updateBodyRadius();
         });
 
         document.getElementById("height")!.addEventListener("change", () => {
-            this.physics.height = Number.parseFloat((<HTMLInputElement>document.getElementById("height")).value);
+            this.physics.height = parseFloat((<HTMLInputElement>document.getElementById("height")).value);
             this.updateBodyRadius();
         });
 
         document.getElementById("gravity")!.addEventListener("change", () => {
-            this.physics.gravity = Number.parseFloat((<HTMLInputElement>document.getElementById("gravity")).value);
+            this.physics.gravity = parseFloat((<HTMLInputElement>document.getElementById("gravity")).value);
         });
 
         document.getElementById("angle")!.addEventListener("change", () => {
-            this.physics.maxAngle = (Number.parseFloat((<HTMLInputElement>document.getElementById("angle")).value)) * Math.PI / 180;
+            this.physics.maxAngle = (parseFloat((<HTMLInputElement>document.getElementById("angle")).value)) * Math.PI / 180;
         });
 
         document.getElementById("reset")!.addEventListener("click", () => {
