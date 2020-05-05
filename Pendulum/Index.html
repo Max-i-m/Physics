@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Physics Simulater</title>
+    <!--<script src="../../js/lib.js"></script>-->
+    <script src="../js/Creator/Pendulum.js"></script> 
+
+    <style>
+        html, body{
+            margin: 0;
+            overflow: hidden;
+            
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        ::selection{
+            background-color: royalblue;
+            color: yellow;
+        }
+
+        #canvas{
+            border-bottom: solid black 1px;
+            position: absolute;
+        }
+
+        #pathCanvas{
+            position: absolute;
+        }
+
+        #inputs{
+            position: fixed;
+            top: 0;
+            left: 16px;
+        }
+
+        #inputs input{
+            border-radius: 5px;
+            width: 75px;
+            margin: 8px 0;
+        }
+
+        #inputs label{
+            display: inline-block;
+            width: 75px;
+            user-select: none;
+        }
+
+        #inputs #reset{
+            width: 100%;
+        }
+
+        #inputs .checkboxRow label{
+            width: auto;
+        }
+
+        #inputs .checkboxRow input{
+            width: 24px;
+            height: 24px;
+            margin-right: 16px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="pathCanvas" width="1200" height="900"></canvas>
+    <canvas id="canvas" width="1200" height="900"></canvas>
+
+    <div id="inputs">
+        <div><label for="length">Length</label> <input id="length" type="number" placeholder="Length" value="3" min="0.25"></div>
+        <div><label for="height">Height</label> <input id="height" type="number" placeholder="Start Height" value="3"  min="0.25"/></div>
+        <div><label for="angle">Max Angle</label> <input id="angle" type="number" placeholder="Angle" value="45" min="0" max="90"/></div>
+        <div><label for="gravity">Gravity</label> <input id="gravity" type="number" placeholder="Gravity" value="9.8" min="0" max="250"/></div>
+        <div class="checkboxRow"><input id="vector" type="checkbox"/><label for="vector">Velocity Vector</label></div>
+        <div class="checkboxRow"><input id="vectorComponents" type="checkbox"/><label for="vectorComponents">Velocity Vector Components</label></div>
+        <div class="checkboxRow"><input id="slowMotion" type="checkbox"/><label for="slowMotion">Slow Motion</label></div>
+        <div class="checkboxRow"><input id="path" type="checkbox"/><label for="path">Path</label></div>
+        <div><input id="reset" type="button" value="Reset"/></div>
+        </div>
+
+    <div id="stats">
+        <div id="height"></div>
+        <div id="velocity"></div>
+    </div>
+</body>
+</html>
