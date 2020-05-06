@@ -1,3 +1,4 @@
+// Models all physics
 class Physics{
     public radius: number = 0.15;
     public x: number = 0;
@@ -16,6 +17,7 @@ class Physics{
 
     }
 
+    // Recalculates the position
     public recalculate(): void{
         if(this.freefall){
             let deltaTime = 60;
@@ -60,20 +62,24 @@ class Physics{
         }
     }
 
+    // Drops the ball
     public drop(): void{
         this.freefall = true;
     }
 
+    // Gets angle of the ball in a specific time
     private getAngle(milliseconds: number): number{
         return this.maxAngle * Math.cos(Math.sqrt(this.gravity / this.length) * milliseconds / 1000);
     }
 
+    // Resets the position of the ball
     public reset(): void{
         this.freefall = false;
         this.xV = 0;
         this.yV = 0;
     }
 
+    // Updates the velocity
     private updateVelocity(): void{
         let time = performance.now();
 
@@ -93,6 +99,7 @@ class Physics{
     }
 }
 
+// Draws pendulum
 class View{
     public physics: Physics;
     private canvas: HTMLCanvasElement;
@@ -124,6 +131,7 @@ class View{
 
         this.updateBodyRadius();
 
+        // Checks if inputs have changed stage
         document.getElementById("length")!.addEventListener("change", () => {
             this.physics.length = parseFloat((<HTMLInputElement>document.getElementById("length")).value);
             this.updateBodyRadius();
@@ -173,10 +181,12 @@ class View{
         });
     }
 
+    // Updates the balls radius
     private updateBodyRadius(): void{
         this.physics.radius = (this.physics.length + this.physics.height) / 50;
     }
 
+    // Resizes the canvas width and height
     private resizeCanvases(): void{
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
@@ -185,6 +195,7 @@ class View{
         this.pathCanvas.height = window.innerHeight;
     }
 
+    // Draws the ball, string, and ground
     public draw(): void{
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.save();
@@ -238,6 +249,7 @@ class View{
         this.ctx.restore();
     }
 
+    // Draws the path
     public pathDraw(): void{
         this.pathCtx.save();
         {
@@ -256,6 +268,7 @@ class View{
     }
 }
 
+// Waits until DOMContent is loaded and starts the program
 document.addEventListener("DOMContentLoaded", () => {
     let view = new View();
 
