@@ -67,19 +67,19 @@ class Physics{
         this.freefall = true;
     }
 
-    // Gets angle of the ball in a specific time
+    // Gets the angle of the ball at a specific time
     private getAngle(milliseconds: number): number{
         return this.maxAngle * Math.cos(Math.sqrt(this.gravity / this.length) * milliseconds / 1000);
     }
 
-    // Resets the position of the ball
+    // Resets the state of the system
     public reset(): void{
         this.freefall = false;
         this.xV = 0;
         this.yV = 0;
     }
 
-    // Updates the velocity
+    // Every tick if the ball is not in freefall it updates the velocity
     private updateVelocity(): void{
         let time = performance.now();
 
@@ -91,8 +91,6 @@ class Physics{
         let angle2 = this.getAngle(time + 0.001);
         let velocity1 = (angle2 - angle1) * 1000000 * this.length;
         //let velocity2 = -this.maxAngle * Math.sin(Math.sqrt(this.gravity / this.length) * time / 1000) * Math.sqrt(this.gravity / this.length) * this.length;
-
-        //console.log(velocity1, velocity2);
 
         this.xV = Math.cos(angle1) * velocity1;
         this.yV = Math.sin(angle1) * velocity1;
@@ -131,7 +129,7 @@ class View{
 
         this.updateBodyRadius();
 
-        // Checks if inputs have changed stage
+        // Add input listeners
         document.getElementById("length")!.addEventListener("change", () => {
             this.physics.length = parseFloat((<HTMLInputElement>document.getElementById("length")).value);
             this.updateBodyRadius();
@@ -272,6 +270,7 @@ class View{
 document.addEventListener("DOMContentLoaded", () => {
     let view = new View();
 
+    // Will be called every frame animation tick
     function mainDraw(): void{
         view.physics.recalculate();
         view.draw();
